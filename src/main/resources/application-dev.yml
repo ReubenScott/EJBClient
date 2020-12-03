@@ -1,0 +1,9 @@
+server:
+  port: 8080
+ 
+spring:
+  datasource:
+    url: jdbc:db2://192.168.211.128:50000/KRDB
+    username: mrndbuser
+    password: pwMujH9h3dD0
+    driver-class-name: com.ibm.db2.jcc.DB2Driver
