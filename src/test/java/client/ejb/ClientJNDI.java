@@ -198,4 +198,5 @@ public class ClientJNDI {
     // System.out.println(jndiClient.insertGurupu());
 
   }
+
 }
