@@ -30,7 +30,7 @@ public class ClientJNDI {
   InitialContext ctx;
 
   {
-    InputStream in = ClientJNDI.class.getClassLoader().getResourceAsStream("jndi.properties");
+    InputStream in = ClientJNDI.class.getClassLoader().getResourceAsStream("jboss-ejb-client.properties");
 
     props = new Properties();
     try {

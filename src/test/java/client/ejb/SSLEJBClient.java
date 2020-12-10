@@ -21,15 +21,17 @@ public class SSLEJBClient {
   private Properties env = new Properties();
 
   public SSLEJBClient() {
-    // JBoss InitialContext
+    // JBoss EAP 7.1.0.GA InitialContext
     env.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
     env.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
     env.put("jboss.naming.client.ejb.context", "true");
+    env.put("jboss.naming.client.connect.timeout", "60000");
     env.put("jboss.naming.client.connect.options.org.xnio.Options.SASL_POLICY_NOPLAINTEXT", "false");
     env.put("jboss.naming.client.connect.options.org.xnio.Options.SASL_DISALLOWED_MECHANISMS", "JBOSS-LOCAL-USER");
     env.put(Context.PROVIDER_URL, "http-remoting://192.168.211.128:8080");
     env.put(Context.SECURITY_PRINCIPAL, "ejb");  // ApplicationRealm 用戶 add-user.bat / application-users
     env.put(Context.SECURITY_CREDENTIALS, "123"); // 明文密碼
+
   }
 
   public void callJBossEJB() {
@@ -66,9 +68,9 @@ public class SSLEJBClient {
     // props.put("remote.connection.default.username", "ejb");
     // props.put("remote.connection.default.password", "123");
 
-    props.put("remote.connection.default.connect.options.org.xnio.Options.SASL_DISALLOWED_MECHANISMS", "JBOSS-LOCAL-USER");
-    props.put("remote.connection.default.connect.options.org.xnio.Options.SASL_POLICY_NOPLAINTEXT", "false");
-    props.put("remote.connection.default.connect.options.org.jboss.remoting3.RemotingOptions.HEARTBEAT_INTERVAL", "600000");
+    // props.put("remote.connection.default.connect.options.org.xnio.Options.SASL_DISALLOWED_MECHANISMS", "JBOSS-LOCAL-USER");
+    // props.put("remote.connection.default.connect.options.org.xnio.Options.SASL_POLICY_NOPLAINTEXT", "false");
+    // props.put("remote.connection.default.connect.options.org.jboss.remoting3.RemotingOptions.HEARTBEAT_INTERVAL", "600000");
 
     // create EJB client configuration
     final EJBClientConfiguration clientConfiguration = new PropertiesBasedEJBClientConfiguration(props);
@@ -101,7 +103,7 @@ public class SSLEJBClient {
 
   public static void main(String[] args) {
     SSLEJBClient sslejbclient = new SSLEJBClient();
-    // sslejbclient.callJBossEJB();
-    sslejbclient.callSSLEJB();
+    sslejbclient.callJBossEJB();
+    // sslejbclient.callSSLEJB();
   }
 }
